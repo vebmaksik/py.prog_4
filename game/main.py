@@ -1,5 +1,5 @@
 from reg import UserManager
-from logic import play_against_computer, play_two_players
+from logic import get_masked_input, play_against_computer, play_two_players
 
 def main():
     user_manager = UserManager()
@@ -14,13 +14,13 @@ def main():
 
         if choice == "1":
             username = input("Имя пользователя: ")
-            password = input("Пароль: ")
+            password = get_masked_input("Пароль: ")
             success, message = user_manager.register_user(username, password)
             print(message)
 
         elif choice == "2":
             username = input("Имя пользователя: ")
-            password = input("Пароль: ")
+            password = get_masked_input("Пароль: ")
             success, message = user_manager.authenticate_user(username, password)
             if success:
                 print(message)
@@ -45,10 +45,10 @@ def play_game(username, user_manager):
         mode_choice = input("Выберите режим: ")
 
         if mode_choice == "1":
-            play_against_computer(username)
+            play_against_computer(username, user_manager)
         elif mode_choice == "2":
             player2_username = input("Имя второго игрока: ")
-            play_two_players(username, player2_username)
+            play_two_players(username, player2_username, user_manager)
         elif mode_choice == "3":
             print("Вы вышли из аккаунта.")
             return
